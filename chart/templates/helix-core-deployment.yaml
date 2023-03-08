@@ -32,9 +32,14 @@ spec:
 {{ toYaml .Values.helixCore.podLabels | nindent 8 }}
 {{- end }}
 
-{{- if .Values.helixCore.podAnnotations }}
+{{- if or .Values.helixCore.podAnnotations .Values.helixCore.velero.enabled }}
       annotations:
+{{- if .Values.helixCore.velero.enabled }}
+        pre.hook.backup.velero.io/command: '["/opt/perforce/sbin/p4d", "-jc"]'
+{{- end }}
+{{- if .Values.helixCore.podAnnotations }}
 {{ toYaml .Values.helixCore.podAnnotations | nindent 8 }}
+{{- end }}
 {{- end }}
 
     spec:

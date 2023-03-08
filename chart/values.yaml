@@ -72,6 +72,17 @@ helixCore:
     type: ClusterIP
     nodePort: 31666
 
+  ## Add support for Velero backup
+  ##
+  velero:
+    ## If enabled, annotations will be added to create checkpoints before backing up
+    ##
+    enabled: false
+
+    ## Checkpoint creation timout
+    ##
+    checkpointTimeout: 600s
+
   ## Persistence for the Helix-Core server
   ##
   persistentVolume:
