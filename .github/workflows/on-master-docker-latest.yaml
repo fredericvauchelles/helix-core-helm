@@ -14,7 +14,7 @@ on:
 
 jobs:
   docker_build_and_push:
-    uses: ./.github/workflows/docker-image-build-push.yml
+    uses: ./.github/workflows/docker-image-build-push.yaml
     with:
-      mage-version: latest
+      image-version: latest
 

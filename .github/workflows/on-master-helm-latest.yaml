@@ -14,4 +14,4 @@ on:
 
 jobs:
   helm_chart_build_and_push:
-    uses: ./.github/workflows/helm-chart-build-push.yml
+    uses: ./.github/workflows/helm-chart-build-push.yaml

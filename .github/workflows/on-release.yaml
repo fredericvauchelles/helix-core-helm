@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker_image_build_and_push:
-    uses: ./.github/workflows/docker-image-build-push.yml
+    uses: ./.github/workflows/docker-image-build-push.yaml
     with:
       image-version: ${{ github.event.release.tag_name }}
 
