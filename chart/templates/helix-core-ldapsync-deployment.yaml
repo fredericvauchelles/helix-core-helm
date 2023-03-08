@@ -1,0 +1,65 @@
+{{- $this := . }}
+{{- range $i, $ldap := .Values.ldapsync.sync }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldapsync-{{ $i }}-{{ include "helix-core.fullname" $this }}
+  labels:
+    {{- include "helix-core.labels" $this | nindent 4 }}
+{{- if $ldap.labels }}
+{{ toYaml $ldap.labels | nindent 4 }}
+{{- end }}
+{{- if $ldap.annotations }}
+  annotations:
+{{ toYaml $ldap.annotations | nindent 4 }}
+{{- end }}
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "helix-core.name" $this }}
+      app.kubernetes.io/instance: {{ $this.Release.Name }}
+      ldapsync: "{{ $i }}"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "helix-core.name" $this }}
+        app.kubernetes.io/instance: {{ $this.Release.Name }}
+        ldapsync: "{{ $i }}"
+{{- if $ldap.podLabels }}
+{{ toYaml $ldap.podLabels | nindent 8 }}
+{{- end }}
+
+{{- if $ldap.podAnnotations }}
+      annotations:
+{{ toYaml $ldap.podAnnotations | nindent 8 }}
+{{- end }}
+
+    spec:
+      volumes:
+        - name: helix-core-secret
+          secret:
+            secretName: {{ if .Values.helixCore.p4admin.existing-secret }}{{ .Values.helixCore.p4admin.existing-secret}}{{- else }} helix-core-secret-{{ include "helix-core.fullname" . }}{{- end }}
+      containers:
+      - name: ldapsync
+        image: "{{ $this.Values.helixCore.image.repository }}:{{ $this.Values.helixCore.image.tag }}"
+        imagePullPolicy: {{ $this.Values.helixCore.image.pullPolicy }}
+        volumeMounts:
+          - mountPath: /etc/helix-core-secret
+            name: helix-core-secret
+        env:
+          - name: P4USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ if .Values.helixCore.p4admin.existing-secret }}{{ .Values.helixCore.p4admin.existing-secret}}{{- else }} helix-core-secret-{{ include "helix-core.fullname" . }}{{- end }}
+                key: superusername
+          - name: P4PORT
+            value: "{{ include "helix-core.fullname" $this }}:{{ $this.Values.helixCore.service.port }}"
+        command: ["/bin/sh", "-c"]
+        args:
+          - >-
+            cat /etc/helix-core-secret/superpassword | p4 login;
+            p4 ldapsync -i {{ $ldap.interval }} -g {{ $ldap.groups }}
+---
+{{- end }}

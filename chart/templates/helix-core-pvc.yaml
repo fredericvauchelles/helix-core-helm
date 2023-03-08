@@ -1,0 +1,44 @@
+{{- if .Values.helixCore.persistentVolume.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: helix-core-pvc-{{ include "helix-core.fullname" . }}
+  labels:
+{{ include "helix-core.labels" . | indent 4 }}
+{{- if .Values.helixCore.persistentVolume.labels }}
+{{ toYaml .Values.helixCore.persistentVolume.labels | indent 4 }}
+{{- end }}
+
+{{- if .Values.helixCore.persistentVolume.annotations }}
+  annotations:
+{{ toYaml .Values.helixCore.persistentVolume.annotations | indent 4 }}
+{{- end }}
+
+spec:
+  accessModes:
+{{ toYaml .Values.helixCore.persistentVolume.accessModes | indent 4 }}
+  resources:
+    requests:
+      storage: {{ .Values.helixCore.persistentVolume.size }}
+
+{{- if .Values.helixCore.persistentVolume.storageClass }}
+{{- if (eq "-" .Values.helixCore.persistentVolume.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.helixCore.persistentVolume.storageClass }}"
+{{- end }}
+{{- end }}
+
+{{- if .Values.helixCore.persistentVolume.volumeBindingMode }}
+  volumeBindingMode: "{{ .Values.helixCore.persistentVolume.volumeBindingMode }}"
+{{- end }}
+
+{{- if .Values.helixCore.persistentVolume.selector }}
+  selector:
+  {{- toYaml .Values.helixCore.persistentVolume.selector | nindent 4 }}
+{{- end -}}
+
+{{- if .Values.helixCore.persistentVolume.volumeName }}
+  volumeName: "{{ .Values.helixCore.persistentVolume.volumeName }}"
+{{- end -}}
+{{- end }}

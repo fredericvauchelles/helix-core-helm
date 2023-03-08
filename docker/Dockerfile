@@ -1,6 +1,6 @@
 FROM phusion/baseimage:0.10.2
 
-LABEL maintainer="frederic.vauchelles@gmail.com"
+LABEL maintainer="frederic.vauchelles@outlook.com"
 
 RUN apt-get update
 RUN apt-get install -y wget
