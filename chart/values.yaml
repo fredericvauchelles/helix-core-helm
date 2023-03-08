@@ -70,6 +70,7 @@ helixCore:
     port: 1666
     sessionAffinity: None
     type: ClusterIP
+    nodePort: 31666
 
   ## Persistence for the Helix-Core server
   ##

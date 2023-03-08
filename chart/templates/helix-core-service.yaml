@@ -39,6 +39,9 @@ spec:
       targetPort: p4
       protocol: TCP
       name: p4
+{{- if .Values.helixCore.service.nodePort }}
+      nodePort: {{ .Values.helixCore.service.nodePort }}
+{{- end }}
   selector:
     app.kubernetes.io/name: {{ include "helix-core.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
