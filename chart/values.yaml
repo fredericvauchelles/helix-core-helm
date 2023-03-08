@@ -7,7 +7,7 @@ helixCore:
   ## Image for Helix-Core
   image:
     repository: fredericvauchelles/helix-core
-    tag: 2019.1
+    tag: latest
     pullPolicy: IfNotPresent
 
   ## Annotations to be added to deployment
@@ -28,7 +28,7 @@ helixCore:
   resources: {}
 
   ## Node labels for Helix-Core server pod assignment
-  ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+  ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/assign-pods-nodes/
   ##
   nodeSelector: {}
 
@@ -145,8 +145,7 @@ helixCore:
   ##
   p4admin:
     ## Create a secret with `superusername` and `superpassword`
-    ## The default values match the default values of the Docker file so
-    ## you can boot a fresh instance
+    ##
     create-secret: true
     
     ## Username for p4admin
