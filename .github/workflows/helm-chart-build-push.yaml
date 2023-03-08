@@ -1,6 +1,7 @@
 name: Build And Push - Helm Charts
 
 on:
+  workflow_call:
   workflow_dispatch:
 
 jobs:
