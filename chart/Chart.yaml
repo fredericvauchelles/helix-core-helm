@@ -2,7 +2,7 @@ apiVersion: v2
 name: helix-core
 version: "0.1.0"
 type: application
-appVersion: "13.0.0"
+appVersion: "21.1.0"
 description: Helm Chart to deploy an Helix-Core application on a kubernetes cluster using Helm.
 home: "https://github.com/fredpointzero/k8s-helix-core"
 maintainers:

@@ -78,7 +78,7 @@ spec:
             periodSeconds: 10
           volumeMounts:
           {{- if .Values.helixCore.persistence.enabled }}
-            - mountPath: /helix-core
+            - mountPath: /data
               name: helix-core-storage
           {{- end }}
             - mountPath: /etc/helix-core-secret
