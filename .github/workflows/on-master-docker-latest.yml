@@ -10,11 +10,13 @@ on:
     paths:
       - 'docker/**'
 
+  workflow_call:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: ./.github/workflows/docker-image-build-push.yml
-      with:
-        image-version: latest
+      - uses: ./.github/workflows/docker-image-build-push.yml
+        with:
+          image-version: latest
 
