@@ -1,4 +1,4 @@
-name: Docker Image Latest
+name: On Master Changed - Docker Image
 
 on:
   push:
