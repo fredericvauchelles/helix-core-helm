@@ -35,4 +35,4 @@ jobs:
         context: .
         push: true
         tags: fredericvauchelles/helix-core:latest
-        file: "{context}/docker/Dockerfile"
+        file: docker/Dockerfile
