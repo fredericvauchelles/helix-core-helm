@@ -71,4 +71,6 @@ ADD ./p4-protect.txt /root/
 ADD ./setup-helix-core.sh /usr/local/bin/
 ADD ./run.sh  /
 
+RUN chmod o+x /run.sh /usr/local/bin/setup-helix-core.sh
+
 CMD ["/run.sh"]

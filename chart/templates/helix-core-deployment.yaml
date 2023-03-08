@@ -57,7 +57,7 @@ spec:
       {{- end }}
         - name: helix-core-secret
           secret:
-            secretName: {{ if .Values.helixCore.p4admin.existing-secret }}{{ .Values.helixCore.p4admin.existing-secret}}{{- else }} helix-core-secret-{{ include "helix-core.fullname" . }}{{- end }}
+            secretName: {{ if .Values.helixCore.p4admin.existingSecret }}{{ .Values.helixCore.p4admin.existingSecret}}{{- else }} helix-core-secret-{{ include "helix-core.fullname" . }}{{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.helixCore.image.repository }}:{{ .Values.helixCore.image.tag }}"
@@ -77,7 +77,7 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 10
           volumeMounts:
-          {{- if .Values.helixCore.persistence.enabled }}
+          {{- if .Values.helixCore.persistentVolume.enabled }}
             - mountPath: /data
               name: helix-core-storage
           {{- end }}

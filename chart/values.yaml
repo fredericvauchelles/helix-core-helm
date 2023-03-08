@@ -146,7 +146,7 @@ helixCore:
   p4admin:
     ## Create a secret with `superusername` and `superpassword`
     ##
-    create-secret: true
+    createSecret: true
     
     ## Username for p4admin
     ##
@@ -160,7 +160,7 @@ helixCore:
     ## generated secret with above parameters
     ##
     ## It will expect to have 2 keys: `superusername` and `superpassword`
-    existing-secret: ""
+    existingSecret: ""
 
 ## LDAP synchronization service
 ## This creates a deployment that synchronize groups from LDAP with users

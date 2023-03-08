@@ -40,7 +40,7 @@ spec:
       volumes:
         - name: helix-core-secret
           secret:
-            secretName: {{ if .Values.helixCore.p4admin.existing-secret }}{{ .Values.helixCore.p4admin.existing-secret}}{{- else }} helix-core-secret-{{ include "helix-core.fullname" . }}{{- end }}
+            secretName: {{ if .Values.helixCore.p4admin.existingSecret }}{{ .Values.helixCore.p4admin.existingSecret}}{{- else }} helix-core-secret-{{ include "helix-core.fullname" . }}{{- end }}
       containers:
       - name: ldapsync
         image: "{{ $this.Values.helixCore.image.repository }}:{{ $this.Values.helixCore.image.tag }}"
@@ -52,7 +52,7 @@ spec:
           - name: P4USER
             valueFrom:
               secretKeyRef:
-                name: {{ if .Values.helixCore.p4admin.existing-secret }}{{ .Values.helixCore.p4admin.existing-secret}}{{- else }} helix-core-secret-{{ include "helix-core.fullname" . }}{{- end }}
+                name: {{ if .Values.helixCore.p4admin.existingSecret }}{{ .Values.helixCore.p4admin.existingSecret}}{{- else }} helix-core-secret-{{ include "helix-core.fullname" . }}{{- end }}
                 key: superusername
           - name: P4PORT
             value: "{{ include "helix-core.fullname" $this }}:{{ $this.Values.helixCore.service.port }}"
