@@ -1,19 +1,16 @@
-name: Docker Image CI
+name: Docker Image Build And Push
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-      
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      image-version:
+        required: true
+        type: string
 
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
       
@@ -35,4 +32,4 @@ jobs:
         context: ./docker
         file: ./docker/Dockerfile
         push: true
-        tags: fredericvauchelles/helix-core:latest
+        tags: fredericvauchelles/helix-core:${{ inputs.image-version }}
