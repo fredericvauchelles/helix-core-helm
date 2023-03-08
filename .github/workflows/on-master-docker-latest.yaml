@@ -17,4 +17,7 @@ jobs:
     uses: ./.github/workflows/docker-image-build-push.yaml
     with:
       image-version: latest
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 

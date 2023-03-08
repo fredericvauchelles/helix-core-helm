@@ -6,6 +6,10 @@ on:
       image-version:
         required: true
         type: string
+    secrets:
+      DOCKER_USERNAME: {required: true }
+      DOCKER_PASSWORD: {required: true }
+      
   workflow_dispatch:
 
 jobs:
