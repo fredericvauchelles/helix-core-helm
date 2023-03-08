@@ -2,6 +2,9 @@ name: Build And Push - Helm Charts
 
 on:
   workflow_call:
+    secrets:
+      CR_TOKEN:
+        required: true
   workflow_dispatch:
 
 jobs:
