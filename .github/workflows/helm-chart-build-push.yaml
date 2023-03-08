@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  release:
+  build_and_push:
     permissions:
       contents: write
     runs-on: ubuntu-latest

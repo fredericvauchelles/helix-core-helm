@@ -9,14 +9,12 @@ on:
     branches: [ "master" ]
     paths:
       - 'docker/**'
-      
+
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/docker-image-build-push.yml
-        with:
-          image-version: latest
+  docker_build_and_push:
+    uses: ./.github/workflows/docker-image-build-push.yml
+    with:
+      mage-version: latest
 
