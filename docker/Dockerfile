@@ -12,9 +12,9 @@ RUN apt-get update
 RUN apt-get install -y helix-p4d=2019.1-1845410~xenial helix-swarm-triggers=2019.1-1829459~xenial
 
 ADD ./run.sh /
-ADD ./p4-users.txt /root/
-ADD ./p4-groups.txt /root/
-ADD ./p4-protect.txt /root/
+ADD ./docker/p4-users.txt /root/
+ADD ./docker/p4-groups.txt /root/
+ADD ./docker/p4-protect.txt /root/
 RUN chmod 777 ./run.sh
 
 ENV P4ROOT=/helix-core P4PORT=1666
